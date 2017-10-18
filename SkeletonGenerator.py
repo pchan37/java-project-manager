@@ -32,9 +32,11 @@ class SkeletonGenerator:
             print 'Error: {} is not a valid number!'.format(num_times_to_prompt)
             raise SystemExit(1)
         user_directories_list = []
+        suffix_dict = {1: 'st', 2: 'nd', 3: 'rd'}
         print 'Note: Use Upper CamelCase'
         for i in xrange(num_times_to_prompt):
-            directory_name = raw_input('Give me the {}th directory name: '.format(i + 1))
+            suffix = suffix_dict.get(i + 1, 'th')
+            directory_name = raw_input('Give me the {}{} directory name: '.format(i + 1, suffix))
             properly_formatted_path = self._ensure_proper_format(directory_name)
             path_with_base_directory = os.path.normpath(os.path.join(self.base_directory, properly_formatted_path))
             user_directories_list.append(path_with_base_directory)
