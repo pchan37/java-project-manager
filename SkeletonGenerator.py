@@ -49,6 +49,7 @@ class SkeletonGenerator:
             properly_formatted_path = self._ensure_proper_format(directory_name)
             try:
                 os.makedirs(directory_name)
+                print 'Created {} successfully!'.format(directory_name)
             except OSError as e:
                 message = 'Failed to create directory: {}.  '
                 message += 'Please ensure you have write permissions!'
@@ -132,6 +133,8 @@ class SkeletonGenerator:
             add_file_script.write('{}\n'.format('with open(sys.argv[1], "w") as java_file:'))
             package_line = 'java_file.write("package {};")'.format(PACKAGE_DIRECTORY_NAME)
             add_file_script.write('\t{}\n'.format(package_line))
+            class_line = 'java_file.write("public class {}{{\\n\\t\\n}}".format(sys.argv[1][:sys.argv.rfind(".java")]))'
+            add_file_script.write('\t{}\n\n'.format(class_line))
             add_file_script.write('subprocess.Popen(["emacs", sys.argv[1]], env=dict(os.environ, **{"XLIB_SKIP_ARGB_VISUALS":"1"}))')
         return True
 

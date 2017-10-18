@@ -71,6 +71,12 @@ After installation, you have five additional shell functions at your disposal:
 Version History
 ---------------
 
+Version 0.2.1 (Still in Progress)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- Fixed the suffix when prompting for the nth directory
+- Improved the add file function to add the stub for the class (ie public class <classname>{})
+- Added feedback message when creating directories
+
 Version 0.2
 ^^^^^^^^^^^
 - Wrote SkeletonGeneratorInterface, a program that simplify access to the functionalities provided
