@@ -2,6 +2,7 @@ import os
 import subprocess
 import sys
 
+import ProjectTester
 import SkeletonGenerator
 
 def get_java_filenames(directory_name):
@@ -44,12 +45,24 @@ def parse_sys_argv():
         subprocess.call(['make', 'clean'])
         subprocess.call(['rm', 'makefile'])
         subprocess.call(['rm', 'make.bat'])
+    elif command == 'compile':
+        sg = SkeletonGenerator.SkeletonGenerator()
+        sg.create_make_files('.', java_filename, java_test_filename)
+        subprocess.call(['make', 'compile'])
+        subprocess.call(['rm', 'makefile'])
+        subprocess.call(['rm', 'make.bat'])
     elif command == 'run':
         sg = SkeletonGenerator.SkeletonGenerator()
         sg.create_make_files('.', java_filename, java_test_filename)
         subprocess.call(['make', 'run'])
         subprocess.call(['rm', 'makefile'])
         subprocess.call(['rm', 'make.bat'])
+    elif command == 'javatest':
+        pt = ProjectTester.ProjectTester(java_test_filename)
+        pt.compile_java_file('.', java_filename, java_test_filename)
+        pt.run_and_redirect_java_file('.', java_filename, java_test_filename)
+        pt.compare_java_file_output()
+        pt.clean_up('.', java_filename, java_test_filename)
     else:
         print 'Illegal Argument Exception!'
         raise SystemExit(1)

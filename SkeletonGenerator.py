@@ -60,12 +60,16 @@ class SkeletonGenerator:
     def generate_makefile(self, PACKAGE_DIRECTORY_NAME, java_test_filename):
         JAVA_CLASS_NAME = java_test_filename[:java_test_filename.find('.java')]
 
-        del_class_files_command = 'rm -rf {}'.format(PACKAGE_DIRECTORY_NAME)
-        compile_files_command = 'javac -d . *.java'.format(PACKAGE_DIRECTORY_NAME)
-        run_file_command = 'java {}.{}'.format(PACKAGE_DIRECTORY_NAME, JAVA_CLASS_NAME)
+        del_class_files_command = '@rm -rf {}'.format(PACKAGE_DIRECTORY_NAME)
+        compile_files_command = '@javac -d . *.java'.format(PACKAGE_DIRECTORY_NAME)
+        run_file_command = '@java {}.{}'.format(PACKAGE_DIRECTORY_NAME, JAVA_CLASS_NAME)
 
         content = '{}\n'.format('clean:')
         content += '\t{}\n'.format(del_class_files_command)
+
+        content += '\n'
+        content += '{}\n'.format('compile:')
+        content += '\t{}\n'.format(compile_files_command)
 
         content += '\n'
         content += '{}\n'.format('run:')
@@ -89,6 +93,12 @@ class SkeletonGenerator:
         content += '  IF "%~1" == "clean" (\n'
         content += '     {}\n'.format(del_class_files_command)
         content += '  )\n'
+
+        content += ') ELSE (\n'
+        content += '  IF "%~1" == "compile" (\n'
+        content += '     {}\n'.format(compile_files_command)
+        content += '  )\n'
+
         content += '  IF "%~1" == "run" (\n'
         content += '     {}\n'.format(del_class_files_command)
         content += '     {}\n'.format(compile_files_command)

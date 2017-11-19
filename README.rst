@@ -9,7 +9,7 @@ Summary
 
 Installation
 ------------
-Note: The installation script would create a bin folder in your home directory and add two Python
+Note: The installation script would create a bin folder in your home directory and add three Python
 files to it.  It will also add a hidden file, .java-project-manager, to your home directory.
 
 Inside a terminal:
@@ -62,17 +62,36 @@ After installation, you have five additional shell functions at your disposal:
 
   - Remove the folder containing the class files for the project/package
 
+- *compile*
+
+  - Remove the folder containing the class files for the project/package
+  - Compiles the files in the package
+
 - *run*
 
   - Remove the folder containing the class files for the project/package
   - Compile the files in the package
   - Run the program
 
+- *javatest*
+
+  - Tests your program and see which cases are wrong as well as how many are wrong
+  - Requires in<number>.txt and out<number>.txt for the given input and expected output respectively
+
 Version History
 ---------------
 
-Version 0.2.1 (Still in Progress)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Version 0.2.4
+^^^^^^^^^^^^^
+- Added uninstallation script
+- Added a compile function
+- Added a new function, javatest, giving access to the new testing framework support
+
+  - compiles and runs your code, compares your output to expected output
+  - print which cases are solved incorrectly, as well as how many are incorrect
+
+Version 0.2.1
+^^^^^^^^^^^^^
 - Fixed the suffix when prompting for the nth directory
 - Improved the add file function to add the stub for the class (ie public class <classname>{})
 - Added feedback message when creating directories
